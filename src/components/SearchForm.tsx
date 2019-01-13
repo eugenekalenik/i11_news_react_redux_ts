@@ -1,7 +1,7 @@
 import { debounce } from "debounce";
 import React from "react";
 import { connect } from "react-redux";
-import { getNews, hideSearchForm, setActiveTab, } from "../actions";
+import { getNews, hideSearchForm, setActiveTab } from "../actions";
 import { INews, IState } from "../interfaces";
 
 interface IProps {
@@ -45,7 +45,6 @@ class SearchForm extends React.Component<IProps, { searchString: string, timeout
   // }
 
   public handleChange = (e: React.FormEvent<HTMLInputElement>) => {
-    console.log(e.currentTarget.value);
     this.debouncedLoad(e.currentTarget.value);
   }
 
