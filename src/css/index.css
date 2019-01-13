@@ -6,6 +6,106 @@ html, body, #root, .news-list {
   height: 100%;
 }
 
+/* 
+#root {
+  position: relative;
+} */
+
+@keyframes search-button {
+  0% {
+    transform: rotate(-3deg);
+    background: #fc0;
+  }
+  50% {
+    transform: rotate( 3deg);
+    background: #000;
+    color: #fff;
+  }
+  100% {
+    transform: rotate(-3deg);
+    background: #fc0;
+  }
+}
+
+.no-news, .loading {
+  height: 100%;
+  display: flex;
+}
+
+.no-news h1, .loading h1 {
+  margin: auto;
+}
+
+.search-form {
+  position: fixed;
+  padding: 0 2rem;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: #fc0;
+  z-index: 30;
+  display: flex;
+  box-shadow: 0 0 1rem #000;
+}
+
+.search-form>div {
+  text-align: center;
+  margin: .5rem auto;
+  width: 100%;
+  max-width: 720px;
+  display: block;
+}
+
+.search-form label {
+  font-size: 1.5rem;
+  line-height: 1rem;
+}
+
+.search-form input {
+  padding: .5rem 1rem;
+  border-radius: .2rem;
+  border: 0;
+  display: inline-block;
+  font-size: 1rem;
+  outline: 0;
+  width: 100%;
+  margin: .25rem 0;
+}
+
+.search-form button {
+  padding: .5rem 1rem;
+  border-radius: .2rem;
+  border: 0;
+  background: #000;
+  color: #fff;
+  margin: .25rem 0;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  outline: 0;
+  width: 100%;
+}
+
+.search-button {
+  position: fixed;
+  padding: .5rem 1rem;
+  border-radius: .2rem;
+  border: 0;
+  background: #fc0;
+  color: #000;
+  cursor: pointer;
+  right: 2rem;
+  font-size: 1rem;
+  bottom: 1rem;
+  box-shadow: 0 0 1rem #000;
+  transition: all ease .3s;
+  animation-name: search-button;
+  animation-iteration-count: infinite;
+  animation-duration: 1s;
+  outline: 0;
+}
+
 body {
   margin: 0 auto;
   padding: 0;
@@ -98,7 +198,7 @@ body {
   border-radius: .1rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .tabs {
     width: 100%;
     display: flex;
@@ -116,6 +216,13 @@ body {
   }
   .news-item {
     width: 50%;
+  }
+  .search-form>div {
+    margin: 1rem auto;
+  }
+  .search-form input, .search-form button {
+    width: auto;
+    margin: 0 .5rem;
   }
 }
 

@@ -1,50 +1,54 @@
 import React from "react";
-
-
-interface Item {
-  source: {
-    id: string,
-    name: string,
-  };
-  author: string;
-  title: string;
-  description: string;
-  url: string;
-  urlToImage: string;
-  publishedAt: string;
-  content: string;
-}
+import { connect } from "react-redux";
+import { INews, IState } from "../interfaces";
 
 interface IProps {
-  data: Item[];
+  activeTab: string;
+  data: INews[];
 }
 
-const NewsList: React.SFC<IProps> = (props: IProps) => {
-  const { data } = props;
-
-  if (!data) {
-    return <div>Loading...</div>;
-  }
-
-  if (!data.length) {
-    return <div>There are no items.</div>;
-  }
-
-  return <div className="news-list">
-    {data.map((item: Item) => {
-      return <div key={item.title} className="news-item" style={{
-        backgroundImage: `url(${item.urlToImage})`,
-        backgroundSize: "cover",
-      }}>
-        <div className="filter">
-          <div className="date">{new Date(item.publishedAt).toDateString()}</div>
-          <div className="title">{item.title}</div>
-          <div className="author"><span>Author:</span> {item.author}</div>
-          <a className="source" href={item.url}>{item.source.name}</a>
+class NewsList extends React.Component<IProps> {
+  public render() {
+    if (!this.props.data) {
+      return (
+        <div className="loading">
+          <h1>Loading...</h1>
         </div>
-      </div>;
-    })}
-  </div>;
-};
+      );
+    }
 
-export default NewsList;
+    if (!this.props.data.length) {
+      return (
+        <div className="no-news">
+          <h1>There are no items.</h1>
+        </div>
+      );
+    }
+
+    return (
+      <div className="news-list">
+        { this.props.data.map((item: INews, index: number) => {
+          return <div key={ index } className="news-item" style={ {
+            backgroundImage: `url(${item.urlToImage})`,
+            backgroundSize: "cover",
+          } }>
+            <div className="filter">
+              <div className="date">{ new Date(item.publishedAt).toDateString() }</div>
+              <div className="title">{ item.title }</div>
+              <div className="author"><span>Author:</span> { item.author }</div>
+              <a className="source" href={ item.url }>{ item.source.name }</a>
+            </div>
+          </div>;
+        }) }
+      </div>
+    );
+  }
+}
+
+export default connect(
+  (state: IState) => ({
+    activeTab: state.activeTab,
+    data: state.data,
+  }),
+  {},
+)(NewsList);
