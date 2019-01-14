@@ -1,3 +1,5 @@
+import { sortProperty } from "../types";
+
 export interface INews {
   source: {
     id: string,
@@ -21,4 +23,6 @@ export interface IState {
   isSearchForm: boolean;
   activeTab: string;
   data: INews[];
+  sorting: string;
+  sortBy: sortProperty;
 }
