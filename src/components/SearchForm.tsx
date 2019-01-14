@@ -1,7 +1,8 @@
 import { debounce } from "debounce";
 import React from "react";
 import { connect } from "react-redux";
-import { getNews, hideSearchForm, setActiveTab, toggleSortBy, toggleSorting } from "../actions";
+import { getNews, hideSearchForm, setActiveTab, setSortingAZ, setSortingBy, setSortingZA } from "../actions";
+import { scrollTop } from "../helpers";
 import { INews, IState } from "../interfaces";
 import { sortProperty } from "../types";
 
@@ -13,8 +14,9 @@ interface IProps {
   hideSearchForm: () => void;
   getNews: (activeTab: string) => void;
   setActiveTab: (activeTab: string) => void;
-  toggleSortBy: (val: sortProperty) => void;
-  toggleSorting: (sortingValue: string) => void;
+  setSortingAZ: (val: sortProperty) => void;
+  setSortingBy: (val: sortProperty) => void;
+  setSortingZA: (val: sortProperty) => void;
 }
 
 class SearchForm extends React.Component<IProps, { searchString: string, timeout: any }> {
@@ -35,41 +37,55 @@ class SearchForm extends React.Component<IProps, { searchString: string, timeout
   public doSearch = (val: string) => {
     this.props.setActiveTab(val);
     this.props.getNews(val);
+    scrollTop();
   }
 
   public handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     this.debouncedLoad(e.currentTarget.value);
   }
 
-  public handleSortBy = (property: sortProperty) => (e: React.FormEvent<HTMLButtonElement>) => {
+  public handleSortAZ = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    this.props.toggleSortBy(property);
+    this.props.setSortingAZ(this.props.sortBy);
+    scrollTop();
   }
 
-  public handleSorting = (val: string) => (e: React.FormEvent<HTMLButtonElement>) => {
+  public handleSortZA = (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    this.props.toggleSorting(val);
+    this.props.setSortingZA(this.props.sortBy);
+    scrollTop();
   }
 
-  public setActiveClass = () => {
-    return this.props.sortBy === "author" ? "active" : "";
+  public handleSortByTitle = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    this.props.setSortingBy("title");
+    scrollTop();
+  }
+
+  public handleSortByAuthor = (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    this.props.setSortingBy("author");
+    scrollTop();
   }
 
   public render() {
-    const { isSearchForm } = this.props;
+    const { isSearchForm, sortBy, sorting } = this.props;
 
     if (isSearchForm === true) {
       return (
-        <form className="search-form" onSubmit={this.handleSubmit}>
+        <form className="search-form" onSubmit={ this.handleSubmit }>
           <div>
-            {/* <label htmlFor="sf">Search</label> */}
-            <input type="text" id="sf" placeholder="Search" onChange={this.handleChange} />
+            {/* <label htmlFor="sf">Search</label> */ }
+            <input type="text" id="sf" placeholder="Search" onChange={ this.handleChange } />
             <span>Sort by</span>
-            <button onClick={this.handleSortBy("title")} className={this.setActiveClass()}>Title</button>
-            <button onClick={this.handleSortBy("author")} className={this.setActiveClass()}>Author</button>
             <button
-              onClick={this.handleSorting(this.props.sorting)}
-              className={this.setActiveClass()}>{this.props.sorting === "ZA" ? "AZ" : "ZA"}</button>
+              onClick={ this.handleSortByTitle }
+              className={ sortBy === "title" ? "active" : "" }>Title</button>
+            <button
+              onClick={ this.handleSortByAuthor }
+              className={ sortBy === "author" ? "active" : "" }>Author</button>
+            { sorting === "AZ" && <button onClick={ this.handleSortZA }>Z-A</button> }
+            { sorting === "ZA" && <button onClick={ this.handleSortAZ }>A-Z</button> }
             <button type="submit">Close</button>
           </div>
         </form>
@@ -91,7 +107,8 @@ export default connect(
     getNews,
     hideSearchForm,
     setActiveTab,
-    toggleSortBy,
-    toggleSorting,
+    setSortingAZ,
+    setSortingBy,
+    setSortingZA,
   },
 )(SearchForm);

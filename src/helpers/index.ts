@@ -5,18 +5,10 @@ export const compareNumbers = (a: any, b: any) => {
   return a - b;
 };
 
-// export const compare = (property: string) => (a: string, b: string) => {
-//   if (a[property] < b[property]) {
-//     return -1;
-//   }
-
-//   if (a[property] > b[property]) {
-//     return 1;
-//   }
-
-//   return 0;
-// };
-
 export const compare = (val: sortProperty) => (a: INews, b: INews) => {
-  return a[val].localeCompare(b[val]);
+  return (a[val] || "z").localeCompare(b[val] || "z");
+};
+
+export const scrollTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };

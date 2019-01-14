@@ -9,7 +9,7 @@ const data = (state: INews[] | null = null, action: IAction) => {
     return action.payload || [];
   }
 
-  if (action.type === actionTypes.SORT_BY) {
+  if (action.type === actionTypes.SORT_NEWS) {
     return action.payload;
   }
 
@@ -41,7 +41,11 @@ const sortBy = (state: sortProperty = "title", action: IAction) => {
 };
 
 const sorting = (state: string = "AZ", action: IAction) => {
-  if (action.type === actionTypes.AZA) {
+  if (action.type === actionTypes.SORT_AZ) {
+    return action.payload;
+  }
+
+  if (action.type === actionTypes.SORT_ZA) {
     return action.payload;
   }
 

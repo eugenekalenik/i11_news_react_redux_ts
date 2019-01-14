@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { getNews, setActiveTab } from "../actions";
 import { tabs } from "../constants";
+import { scrollTop } from "../helpers";
 import { IState } from "../interfaces";
 
 interface IProps {
@@ -27,6 +28,7 @@ class Tabs extends React.Component<IProps> {
   public handleClick = (tab: string) => () => {
     this.props.setActiveTab(tab);
     this.props.getNews(tab);
+    scrollTop();
   }
 
   public render() {

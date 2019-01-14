@@ -6,11 +6,6 @@ html, body, #root, .news-list {
   height: 100%;
 }
 
-/* 
-#root {
-  position: relative;
-} */
-
 @keyframes search-button {
   0% {
     transform: rotate(-3deg);
@@ -53,8 +48,6 @@ html, body, #root, .news-list {
 .search-form>div {
   text-align: center;
   margin: .5rem auto;
-  /* width: 100%; */
-  /* max-width: 720px; */
   display: block;
 }
 
@@ -86,6 +79,10 @@ html, body, #root, .news-list {
   font-size: 1rem;
   outline: 0;
   width: 100%;
+}
+
+.search-form button.active {
+  background: #f00;
 }
 
 .search-button {
@@ -153,6 +150,8 @@ body {
   background-position: 50% 50%;
   text-shadow: 0 0 10px #000;
   color: #fff;
+  background-size: cover;
+  height: 240px;
 }
 
 .news-item .filter {

@@ -32,8 +32,7 @@ class NewsList extends React.Component<IProps> {
       <div className="news-list">
         {this.props.data.map((item: INews, index: number) => {
           return <div key={index} className="news-item" style={{
-            backgroundImage: `url(${item.urlToImage})`,
-            backgroundSize: "cover",
+            backgroundImage: `url(${item.urlToImage})`
           }}>
             <div className="filter">
               <div className="date">{new Date(item.publishedAt).toDateString()}</div>

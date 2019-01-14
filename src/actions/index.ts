@@ -11,7 +11,7 @@ export const setActiveTab = (activeTab: string) => (dispatch: Dispatch) => {
 
 export const getNews = (activeTab: string) => async (dispatch: Dispatch) => {
   const data = await fetchNews(activeTab);
-  dispatch({ type: actionTypes.GET_NEWS, payload: data });
+  dispatch({ type: actionTypes.GET_NEWS, payload: data.sort(compare("title")) });
   return data;
 };
 
@@ -23,22 +23,18 @@ export const hideSearchForm = () => (dispatch: Dispatch) => {
   dispatch({ type: actionTypes.HIDE_SEARCH_FORM, payload: false });
 };
 
-export const toggleSortBy = (property: sortProperty) => (dispatch: Dispatch, getState: () => IState) => {
-  const sortBy = getState().sortBy;
-
-  if (sortBy === property) {
-    dispatch({ type: actionTypes.SORT_BY, payload: getState().data.sort(compare(property)) });
-  }
-
-  dispatch({ type: actionTypes.SORT_BY, payload: getState().data.reverse() });
+export const setSortingAZ = (val: sortProperty) => (dispatch: Dispatch, getState: () => IState) => {
+  dispatch({ type: actionTypes.SORT_AZ, payload: "AZ" });
+  dispatch({ type: actionTypes.SORT_NEWS, payload: getState().data.sort(compare(val)) });
 };
 
-export const toggleSorting = (sortingValue: string) => (dispatch: Dispatch, getState: () => IState) => {
-  const sorting = getState().sorting;
+export const setSortingZA = (val: sortProperty) => (dispatch: Dispatch, getState: () => IState) => {
+  dispatch({ type: actionTypes.SORT_ZA, payload: "ZA" });
+  dispatch({ type: actionTypes.SORT_NEWS, payload: getState().data.reverse() });
+};
 
-  if (sorting === sortingValue) {
-    dispatch({ type: actionTypes.AZA, payload: sortingValue });
-  }
-
-  dispatch({ type: actionTypes.AZA, payload: sortingValue });
+export const setSortingBy = (val: sortProperty) => (dispatch: Dispatch, getState: () => IState) => {
+  dispatch({ type: actionTypes.SORT_AZ, payload: "AZ" });
+  dispatch({ type: actionTypes.SORT_BY, payload: val });
+  dispatch({ type: actionTypes.SORT_NEWS, payload: getState().data.sort(compare(val)) });
 };
