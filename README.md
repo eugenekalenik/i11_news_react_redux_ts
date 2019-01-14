@@ -2,7 +2,7 @@
 
 Stack of technologies: React, Redux, TypeScript, Fetch API.
 
-Demo: (https://eugenekalenik.github.io/i11_news_react_redux_ts/).
+Demo: https://eugenekalenik.github.io/i11_news_react_redux_ts/.
 
 ### Requirements
 
@@ -20,6 +20,13 @@ Demo: (https://eugenekalenik.github.io/i11_news_react_redux_ts/).
   "id": "techcrunch",
   "name": "TechCrunch"
 },
+```
+
+### Cloning repository
+
+```
+git clone https://github.com/eugenekalenik/i11_news_react_redux_ts.git
+cd i11_news_react_redux_ts
 ```
 
 ### Installing
