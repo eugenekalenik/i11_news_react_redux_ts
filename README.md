@@ -26,6 +26,7 @@ Demo: https://eugenekalenik.github.io/i11_news_react_redux_ts/.
 
 ```
 git clone https://github.com/eugenekalenik/i11_news_react_redux_ts.git
+cd i11_news_react_redux_ts
 ```
 
 ### Installing
