@@ -2,7 +2,7 @@
 
 Stack of technologies: React, Redux, TypeScript, Fetch API.
 
-Demo: (https://eugenekalenik.github.io/i11_news_react_redux_ts/).
+Demo: https://eugenekalenik.github.io/i11_news_react_redux_ts/.
 
 ### Requirements
 
